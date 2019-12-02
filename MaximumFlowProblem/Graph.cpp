@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "Graph.h"
 #include <iostream>
+#include <exception>
 
 Edge::Edge(int _source, int _destination, int _weight) {
 	this->source = _source;
 	this->destination = _destination;
 	this->weight = _weight;
+	this->next = nullptr;
 }
 
 Graph::Graph(int _vertexCount) {
@@ -19,11 +21,21 @@ Graph::Graph(int _vertexCount) {
 	}
 }
 
-Edge *Graph::addEdge(int _source, int _destination, int _weight) const {
-	Edge *edge = new Edge(_source, _destination, _weight);
-	edge->next = this->list[_source]->head;
-	this->list[_source]->head = edge;
+Edge *Graph::addEdge(int _source, int _destination, int _weight) {
 
+	if (_source >= this->vertexCount || _destination >= this->vertexCount) {
+		throw std::exception("There is no such vertices.");
+	}
+
+	Edge *edge;
+	if (edge = this->edgeExists(_source, _destination)) {
+		edge->weight = _weight;
+	} else {
+		edge = new Edge(_source, _destination, _weight);
+		edge->next = this->list[_source]->head;
+		this->list[_source]->head = edge;
+	}
+	
 	return edge;
 }
 
@@ -45,6 +57,27 @@ void Graph::print() {
 			edge = edge->next;
 		}
 	}
+}
+
+Edge *Graph::edgeExists(int _source, int _destination) {
+
+	Edge *edge;
+
+	if (this->list[_source]) {
+
+		edge = this->list[_source]->head;
+		while (edge != nullptr) {
+			if (edge->destination == _destination) {
+				return edge;
+			}
+
+			edge = edge->next;
+		}
+
+		return nullptr;
+	}
+
+	return nullptr;
 }
 
 

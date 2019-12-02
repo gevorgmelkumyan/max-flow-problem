@@ -20,7 +20,8 @@ class Graph {
 public:
 	Graph(int _vertexCount);
 
-	Edge* addEdge(int _source, int _destination, int _weight) const;
+	Edge *addEdge(int _source, int _destination, int _weight);
+	Edge *edgeExists(int _source, int _destination);
 	void print();
 
 	~Graph();
