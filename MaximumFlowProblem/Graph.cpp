@@ -2,6 +2,12 @@
 #include "Graph.h"
 #include <iostream>
 
+Edge::Edge(int _source, int _destination, int _weight) {
+	this->source = _source;
+	this->destination = _destination;
+	this->weight = _weight;
+}
+
 Graph::Graph(int _vertexCount) {
 	this->vertexCount = _vertexCount;
 	this->list = std::vector<AdjacencyList *> ();
@@ -15,7 +21,7 @@ Graph::Graph(int _vertexCount) {
 
 Edge *Graph::addEdge(int _source, int _destination, int _weight) const {
 	Edge *edge = new Edge(_source, _destination, _weight);
-	edge->setNext(this->list[_source]->head);
+	edge->next = this->list[_source]->head;
 	this->list[_source]->head = edge;
 
 	return edge;
@@ -27,16 +33,16 @@ void Graph::print() {
 		edge = this->list[i]->head;
 		std::cout << i << " ---> [";
 		while (edge != nullptr) {
-			std::cout << "(" << edge->getDestination() << ", " << edge->getWeight() << ")";
+			std::cout << "(" << edge->destination << ", " << edge->weight << ")";
 
-			if (edge->getNext() != nullptr) {
+			if (edge->next != nullptr) {
 				std::cout << ", ";
 			}
 			else {
 				std::cout << "]" << std::endl;
 			}
 
-			edge = edge->getNext();
+			edge = edge->next;
 		}
 	}
 }
