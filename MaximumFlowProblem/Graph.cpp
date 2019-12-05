@@ -39,6 +39,46 @@ Edge *Graph::addEdge(int _source, int _destination, int _weight) {
 	return edge;
 }
 
+void Graph::BFS() {
+
+	std::vector<bool> visited = std::vector<bool>(this->vertexCount);
+
+	for (int i = 0; i < this->vertexCount; ++i) {
+		visited[i] = false;
+	}
+
+	int source = 0;
+	int destination = this->vertexCount - 1;
+
+	this->BFSQueue(source, destination, visited);
+}
+
+void Graph::BFSQueue(int _source, int _destination, std::vector<bool>& _visited) {
+
+	int currentIndex;
+	std::queue<int> queue;
+
+	_visited[_source] = true;
+	queue.push(_source);
+
+	while (!queue.empty()) {
+		currentIndex = queue.front();
+		queue.pop();
+
+		Edge* head = this->list[currentIndex]->head;
+
+		while (head != nullptr) {
+			if (!_visited[head->destination]) {
+				std::cout << head->destination << std::endl;
+				_visited[head->destination] = true;
+				queue.push(head->destination);
+			}
+
+			head = head->next;
+		}
+	}
+}
+
 void Graph::print() {
 	Edge *edge;
 	for (int i = 0; i < this->vertexCount; ++i) {
