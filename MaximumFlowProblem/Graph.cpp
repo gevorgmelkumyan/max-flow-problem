@@ -12,19 +12,14 @@ Edge::Edge(int _source, int _destination, int _weight) {
 
 Graph::Graph(int _vertexCount) {
 	this->vertexCount = _vertexCount;
-	this->list = std::vector<AdjacencyList *> ();
-
-	for (int i = 0; i < this->vertexCount; ++i) {
-		AdjacencyList *edge = new AdjacencyList();
-		edge->head = nullptr;
-		this->list.push_back(edge);
-	}
+	this->list = Utilities::initAdjacencyListVector(this->vertexCount);
+	this->flow = Utilities::initAdjacencyListVector(this->vertexCount);
 }
 
 Edge *Graph::addEdge(int _source, int _destination, int _weight) {
 
 	if (_source >= this->vertexCount || _destination >= this->vertexCount) {
-		throw std::exception("There is no such vertices.");
+		throw exception("There is no such vertices.");
 	}
 
 	Edge *edge;
@@ -41,7 +36,7 @@ Edge *Graph::addEdge(int _source, int _destination, int _weight) {
 
 void Graph::BFS() {
 
-	std::vector<bool> visited = std::vector<bool>(this->vertexCount);
+	vector<bool> visited = vector<bool>(this->vertexCount);
 
 	for (int i = 0; i < this->vertexCount; ++i) {
 		visited[i] = false;
@@ -53,10 +48,10 @@ void Graph::BFS() {
 	this->BFSQueue(source, destination, visited);
 }
 
-void Graph::BFSQueue(int _source, int _destination, std::vector<bool>& _visited) {
+void Graph::BFSQueue(int _source, int _destination, vector<bool>& _visited) {
 
 	int currentIndex;
-	std::queue<int> queue;
+	queue<int> queue;
 
 	_visited[_source] = true;
 	queue.push(_source);
@@ -69,7 +64,6 @@ void Graph::BFSQueue(int _source, int _destination, std::vector<bool>& _visited)
 
 		while (head != nullptr) {
 			if (!_visited[head->destination]) {
-				std::cout << head->destination << std::endl;
 				_visited[head->destination] = true;
 				queue.push(head->destination);
 			}
@@ -83,15 +77,15 @@ void Graph::print() {
 	Edge *edge;
 	for (int i = 0; i < this->vertexCount; ++i) {
 		edge = this->list[i]->head;
-		std::cout << i << " ---> [";
+		cout << i << " ---> [";
 		while (edge != nullptr) {
-			std::cout << "(" << edge->destination << ", " << edge->weight << ")";
+			cout << "(" << edge->destination << ", " << edge->weight << ")";
 
 			if (edge->next != nullptr) {
-				std::cout << ", ";
+				cout << ", ";
 			}
 			else {
-				std::cout << "]" << std::endl;
+				cout << "]" << endl;
 			}
 
 			edge = edge->next;
@@ -100,24 +94,7 @@ void Graph::print() {
 }
 
 Edge *Graph::edgeExists(int _source, int _destination) {
-
-	Edge *edge;
-
-	if (this->list[_source]) {
-
-		edge = this->list[_source]->head;
-		while (edge != nullptr) {
-			if (edge->destination == _destination) {
-				return edge;
-			}
-
-			edge = edge->next;
-		}
-
-		return nullptr;
-	}
-
-	return nullptr;
+	return Utilities::edgeExists(this->list, _source, _destination);
 }
 
 
