@@ -23,8 +23,10 @@ public:
 
 	Edge *addEdge(int _source, int _destination, int _weight);
 	Edge *edgeExists(int _source, int _destination);
-	void BFS();
-	void BFSQueue(int _source, int _destination, std::vector<bool>& _visited);
+	Edge *getEdge(int _source, int _destination);
+	void initializeFlow();
+	std::vector<int> BFSQueue(int _source, int _destination);
+	int FordFulkersonAlgorithm();
 	void print();
 
 	~Graph();
@@ -32,6 +34,7 @@ public:
 private:
 	int vertexCount;
 	std::vector<AdjacencyList*> list;
+	Graph* flowGraph;
 
 };
 

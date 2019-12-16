@@ -27,6 +27,10 @@ Edge *Graph::addEdge(int _source, int _destination, int _weight) {
 		throw std::exception("There is no such vertices.");
 	}
 
+	if (this->flowGraph != nullptr) {
+		this->flowGraph->addEdge(_source, _destination, 0);
+	}
+
 	Edge *edge;
 	if (edge = this->edgeExists(_source, _destination)) {
 		edge->weight = _weight;
@@ -39,26 +43,58 @@ Edge *Graph::addEdge(int _source, int _destination, int _weight) {
 	return edge;
 }
 
-void Graph::BFS() {
+void Graph::initializeFlow() {
+	this->flowGraph = new Graph(this->vertexCount);
+	this->flowGraph->flowGraph = nullptr;
+}
 
-	std::vector<bool> visited = std::vector<bool>(this->vertexCount);
-
-	for (int i = 0; i < this->vertexCount; ++i) {
-		visited[i] = false;
-	}
+int Graph::FordFulkersonAlgorithm() {
 
 	int source = 0;
 	int destination = this->vertexCount - 1;
+	int maxFlow = 0;
 
-	this->BFSQueue(source, destination, visited);
+	std::vector<int> parent;
+
+	bool pathExists = true;
+
+	while (true) {
+		parent = this->BFSQueue(source, destination);
+		pathExists = (parent[destination] != -1);
+
+		if (!pathExists) {
+			break;
+		}
+
+		int min = INT_MAX;
+
+		int u;
+		int v;
+
+		for (v = destination; v != source; v = parent[v]) {
+			u = parent[v];
+			min = std::min(min, this->getEdge(u, v)->weight - this->flowGraph->getEdge(u, v)->weight);
+		}
+
+		for (v = destination; v != source; v = parent[v]) {
+			u = parent[v];
+			this->flowGraph->addEdge(u, v, min);
+		}
+
+		maxFlow += min;
+	}
+
+	return maxFlow;
 }
 
-void Graph::BFSQueue(int _source, int _destination, std::vector<bool>& _visited) {
+std::vector<int> Graph::BFSQueue(int _source, int _destination) {
 
 	int currentIndex;
 	std::queue<int> queue;
+	std::vector<bool> visited = std::vector<bool>(this->vertexCount, false);
+	std::vector<int> parent = std::vector<int>(this->vertexCount, -1);
 
-	_visited[_source] = true;
+	visited[_source] = true;
 	queue.push(_source);
 
 	while (!queue.empty()) {
@@ -68,15 +104,17 @@ void Graph::BFSQueue(int _source, int _destination, std::vector<bool>& _visited)
 		Edge* head = this->list[currentIndex]->head;
 
 		while (head != nullptr) {
-			if (!_visited[head->destination]) {
-				std::cout << head->destination << std::endl;
-				_visited[head->destination] = true;
+			if (!visited[head->destination] && this->flowGraph->getEdge(head->source, head->destination)->weight < head->weight) {
+				visited[head->destination] = true;
+				parent[head->destination] = head->source;
 				queue.push(head->destination);
 			}
 
 			head = head->next;
 		}
 	}
+
+	return parent;
 }
 
 void Graph::print() {
@@ -84,6 +122,12 @@ void Graph::print() {
 	for (int i = 0; i < this->vertexCount; ++i) {
 		edge = this->list[i]->head;
 		std::cout << i << " ---> [";
+
+		if (edge == nullptr) {
+			std::cout << "]" << std::endl;
+			continue;
+		}
+
 		while (edge != nullptr) {
 			std::cout << "(" << edge->destination << ", " << edge->weight << ")";
 
@@ -118,6 +162,10 @@ Edge *Graph::edgeExists(int _source, int _destination) {
 	}
 
 	return nullptr;
+}
+
+Edge* Graph::getEdge(int _source, int _destination) {
+	return this->edgeExists(_source, _destination);
 }
 
 
