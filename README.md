@@ -1,5 +1,13 @@
 # Maximum-flow problem
 
+[![Issues](https://img.shields.io/github/issues/gevorgmelkumyan/max-flow-problem)]
+[![Stars](https://img.shields.io/github/stars/gevorgmelkumyan/max-flow-problem)]
+[![Forks](https://img.shields.io/github/forks/gevorgmelkumyan/max-flow-problem)]
+[![License](https://img.shields.io/github/license/gevorgmelkumyan/max-flow-problem)]
+[![Downloads](https://img.shields.io/github/downloads/gevorgmelkumyan/max-flow-problem/total)]
+[![Size](https://img.shields.io/github/repo-size/gevorgmelkumyan/max-flow-problem)]
+[![Release](https://img.shields.io/github/v/release/gevorgmelkumyan/max-flow-problem)]
+
 This project represents and solves Maximum-flow problem using the famous Ford-Fulkerson method. The repository contains codes for ```Graph``` data structure and it's supports. ```Graph``` represented using ```AdjacencyList```, below I leave some literature for those who is interested.
 
 ## Getting Started
@@ -36,8 +44,8 @@ graph.addEdge(2, 1, 4);
 graph.addEdge(3, 2, 9);
 graph.addEdge(4, 3, 7);
 ```
-the same in picture:
-![alt text](http://url/to/img.png)
+
+![graph](graph.png)
 
 #### Execute The Ford-Fulkerson method
 
@@ -67,15 +75,9 @@ int maxFlow = graph.FordFulkersonAlgorithm();
 
 The project doesn't have any test yet.
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## Authors
 
-* **Gevorg Melkumyan** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See the list of [contributors](https://github.com/gevorgmelkumyan/max-flow-problem/contributors) who participated in this project.
 
 ## License
 
@@ -83,3 +85,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Literature
 
+[1] Ford, L. R., Jr., Fulkerson, D. R. (1962). _Flows in Networks_. Princeton, NJ.
+
+[2] Cormen, T.H., Leiserson, C. E., Rivest, R. L. (2009). _Introduction to Algorithms, 3rd Edition_.
+
+[3] Hemant, J. (2016). _Problem Solving in Data Structures & Algorithms Using C++, First Edition_.
