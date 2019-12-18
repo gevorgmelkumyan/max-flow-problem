@@ -1,5 +1,13 @@
 # Maximum-flow problem
 
+[![Issues](https://img.shields.io/github/issues/gevorgmelkumyan/max-flow-problem)]
+[![Stars](https://img.shields.io/github/stars/gevorgmelkumyan/max-flow-problem)]
+[![Forks](https://img.shields.io/github/forks/gevorgmelkumyan/max-flow-problem)]
+[![License](https://img.shields.io/github/license/gevorgmelkumyan/max-flow-problem)]
+[![Downloads](https://img.shields.io/github/downloads/gevorgmelkumyan/max-flow-problem/total)]
+[![Size](https://img.shields.io/github/repo-size/gevorgmelkumyan/max-flow-problem)]
+[![Release](https://img.shields.io/github/v/release/gevorgmelkumyan/max-flow-problem)]
+
 This project represents and solves Maximum-flow problem using the famous Ford-Fulkerson method. The repository contains codes for ```Graph``` data structure and it's supports. ```Graph``` represented using ```AdjacencyList```, below I leave some literature for those who is interested.
 
 ## Getting Started
