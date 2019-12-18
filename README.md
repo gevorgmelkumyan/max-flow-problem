@@ -36,8 +36,8 @@ graph.addEdge(2, 1, 4);
 graph.addEdge(3, 2, 9);
 graph.addEdge(4, 3, 7);
 ```
-the same in picture:
-![alt text](http://url/to/img.png)
+
+![graph](graph.png)
 
 #### Execute The Ford-Fulkerson method
 
@@ -67,19 +67,14 @@ int maxFlow = graph.FordFulkersonAlgorithm();
 
 The project doesn't have any test yet.
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## Authors
 
-* **Gevorg Melkumyan** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See the list of [contributors](https://github.com/gevorgmelkumyan/max-flow-problem/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Literature
+
 
