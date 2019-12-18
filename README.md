@@ -77,4 +77,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Literature
 
+[1] Ford, L. R., Jr., Fulkerson, D. R. (1962). _Flows in Networks_. Princeton, NJ.
 
+[2] Cormen, T.H., Leiserson, C. E., Rivest, R. L. (2009). _Introduction to Algorithms, 3rd Edition_.
+
+[3] Hemant, J. (2016). _Problem Solving in Data Structures & Algorithms Using C++, First Edition_.
